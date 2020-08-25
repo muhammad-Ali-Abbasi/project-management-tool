@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "proje-bf563"
+    "default": "proje-f1d38",
+    "yes": "proje-f1d38",
+    "development": "proje-f1d38"
   }
 }

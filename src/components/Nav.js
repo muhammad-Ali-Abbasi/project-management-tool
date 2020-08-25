@@ -1,31 +1,29 @@
-import React, {
-    lazy,
-    Suspense
-  } from 'react';
+import React  from 'react';
+
   import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link
   } from "react-router-dom";
-import Dashboard from './Dashboard';
-import Auth from './Auth';
-import LoadingScreen from './Loading';
 
-  
-  function Routes() {
+  import {connect} from 'react-redux'
+  function Routes(props) {
     return (
-        <Router>
-        <div>
+  
+      < header className="App-header dark-mode">
+        <p>
+         Welcome to Proje - your new project management tool.
+        </p>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">Shop</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/About">About</Link>
             </li>
             <li>
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to={props.user?"/dashboard":"/signup"}>Dashboard</Link>
             </li>
           </ul>
   
@@ -38,17 +36,12 @@ import LoadingScreen from './Loading';
             you have multiple routes, but you want only one
             of them to render at a time
           */}
-          <Switch>
-            <Route path="/auth">
-              <Auth />
-            </Route>
-            <Route exact path="/dashboard">
-              <Dashboard />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+          
+        </ header>
+  
     );
   }
-
-  export default Routes
+  const mapStateToProps=state=>({
+    user: state.Auth.user
+  })
+  export default connect(mapStateToProps)(Routes)

@@ -1,0 +1,25 @@
+.login-container{
+    width: 60%;
+    height: 27rem;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+
+}
+.login-backbar{
+    display: flex;
+    align-items: center;
+    padding-bottom: 4rem;
+}
+.login-backbar-icon{
+    width: 2rem;
+    height: 2rem;
+}
+.login-backbar-text{
+    padding-left: 1rem;
+}
+.login-backbar-text:hover{
+    text-decoration: none;
+    color: inherit;
+}

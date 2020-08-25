@@ -1,0 +1,25 @@
+.signup-container{
+    width: 60%;
+    height: 33rem;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    margin-bottom: rem;
+}
+.signup-backbar{
+    display: flex;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+.signup-backbar-icon{
+    width: 2rem;
+    height: 2rem;
+}
+.signup-backbar-text{
+    padding-left: 1rem;
+}
+.signup-backbar-text:hover{
+    text-decoration: none;
+    color: inherit;
+}

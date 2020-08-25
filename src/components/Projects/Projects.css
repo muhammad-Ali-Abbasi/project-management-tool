@@ -1,0 +1,40 @@
+.project-svg{
+
+    background-size: cover;
+    width: 70%;
+     max-height: auto;
+}
+.grid-item{
+    padding: 24px;
+
+}
+@media (min-width: 960px){
+
+.grid-item:not(:last-of-type) {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+}
+@media (max-width: 959.95px){
+
+.grid-item:not(:last-of-type) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+}
+@media (max-width: 959.95px){
+
+    .project-analysis-svg{
+        display: none;
+    }
+}
+.Active-projects-bar{
+    position: relative;
+}
+.Active-projects-bar::before{
+    left: 0;
+    width: 48px;
+    bottom: -8px;
+    height: 3px;
+    content: " ";
+    position: absolute;
+    background-color: #3949ab;
+}

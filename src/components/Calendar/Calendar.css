@@ -1,0 +1,13 @@
+.react-calendar{
+    width: 90% !important;
+    margin: auto;
+    border: none;
+    background-color: inherit;
+    color: WHITE;
+}
+.react-calendar__viewContainer{
+    color: inherit;
+}
+.calendardarkmode{
+    background-color: #424242;
+}

@@ -1,6 +1,8 @@
 import React from 'react';
+import {Link} from "react-router-dom"
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -15,17 +17,18 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import Assessment from '@material-ui/icons/Assessment';
 import BugReport from '@material-ui/icons/BugReport';
 import Toc from '@material-ui/icons/Toc';
 import ViewList from '@material-ui/icons/ViewList';
 import Dashboard from '@material-ui/icons/Dashboard';
 import AddToQueueIcon from '@material-ui/icons/AddToQueue';
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import Collapse from '@material-ui/core/Collapse';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 //comps
 import Menu from './Menu';
+import RightNavGroup from './Dashboard/RightNavGroup/RightNavGroup';
 
 const drawerWidth = 240;
 
@@ -40,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -90,12 +94,21 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  leftNavGroup:{
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center'
+  }
 }));
 
-export default function MiniDrawer() {
+export default function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [openlist1, setOpenlist1] = React.useState(false);
+  const [openlist2, setOpenlist2] = React.useState(false);
+  const [openlist3, setOpenlist3] = React.useState(false);
+ 
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -114,8 +127,8 @@ export default function MiniDrawer() {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
-          <IconButton
+        <Toolbar style={{display:'flex',justifyContent:'space-between'}}>
+          <div class={classes.leftNavGroup}><IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -124,13 +137,15 @@ export default function MiniDrawer() {
               [classes.hide]: open,
             })}
           >
+            
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
             Proje - Dashboard
-          
-          </Typography>  
-        </Toolbar><Menu />
+          </Typography></div>
+          <RightNavGroup />
+        </Toolbar>
+        <Menu />
       </AppBar>
       <Drawer
         variant="permanent"
@@ -152,52 +167,117 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
+        <Link style={{textDecoration:"none",color:"inherit"}} to="/">
         <ListItem button key={0}>
               <ListItemText primary={'Main'} />
             </ListItem>
+            </Link>
+            <Link to="/dashboard">
            <ListItem button key={0}>
               <ListItemIcon> <Dashboard /> </ListItemIcon>
               <ListItemText primary={'Dashboard'} />
             </ListItem>
+            </Link>
+            <Link to="/sprints">
             <ListItem button key={1}>
               <ListItemIcon> <ListAltIcon /> </ListItemIcon>
               <ListItemText primary={'Sprints'} />
             </ListItem>
+            </Link>
             <ListItem button key={0}>
-              <ListItemIcon> <AddToQueueIcon /> </ListItemIcon>
-              <ListItemText primary={'Backlog'} />
+              <ListItemText primary={'Users'} />
             </ListItem>
+            <ListItem  button key={2} onClick={()=>setOpenlist1(!openlist1)}>
+            <ListItemIcon> <AddToQueueIcon /> </ListItemIcon>
+            <ListItemText primary={'Backlogs'} />
+        {openlist1 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={openlist1} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <Link to="BacklogsList">
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+            <AddToQueueIcon />
+            </ListItemIcon>
+            <ListItemText primary="Backlogs" />
+          </ListItem>
+          </Link>
+          <Link to="BacklogsCreate">
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+            <AddToQueueIcon />
+            </ListItemIcon>
+            <ListItemText primary="Create backlog" />
+          </ListItem>
+          </Link>
+        </List>
+      </Collapse>
+            <Link to="/Projects">
             <ListItem button key={1}>
               <ListItemIcon> <ViewList /> </ListItemIcon>
               <ListItemText primary={'Projects'} />
             </ListItem>
+            </Link>
         </List>
         <Divider />
         <List>
             <ListItem button key={0}>
               <ListItemText primary={'Users'} />
             </ListItem>
-            <ListItem button key={1}>
-              <ListItemIcon> <Toc /> </ListItemIcon>
-              <ListItemText primary={'Active Sprints'} />
-            </ListItem>
-            <ListItem button key={2}>
-              <ListItemIcon> <BugReport /> </ListItemIcon>
-              <ListItemText primary={'Issues'} />
-            </ListItem>
+            <ListItem  button key={2} onClick={()=>setOpenlist2(!openlist2)}>
+            <ListItemIcon> <Toc /> </ListItemIcon>
+            <ListItemText primary={'Active Sprints'} />
+        {openlist2 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={openlist2} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <Link to="ActiveSprintList">
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <Toc />
+            </ListItemIcon>
+            <ListItemText primary="Active Sprints" />
+          </ListItem>
+          </Link>
+          <Link to="ActiveSprintCreate">
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <Toc />
+            </ListItemIcon>
+            <ListItemText primary="Create Active Sprint" />
+          </ListItem>
+          </Link>
+        </List>
+      </Collapse>
+            <ListItem  button key={2} onClick={()=>setOpenlist3(!openlist3)}>
+        <ListItemIcon>
+          <BugReport />
+        </ListItemIcon>
+        <ListItemText primary="Issues" />
+        {openlist3 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={openlist3} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <Link to="IssuesList">
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <BugReport />
+            </ListItemIcon>
+            <ListItemText primary="Issues" />
+          </ListItem>
+          </Link>
+          <Link to="IssuesCreate">
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <BugReport />
+            </ListItemIcon>
+            <ListItemText primary="Create Issue" />
+          </ListItem>
+          </Link>
+        </List>
+      </Collapse>
         </List>
       </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-          facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-          gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-          donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. 
-        </Typography>
-      </main>
     </div>
   );
 }

@@ -1,0 +1,34 @@
+.notification-button-group{
+    display: flex;
+    max-width: 30%;
+    justify-content: space-around;
+    margin-top: 1.6rem;
+    margin-left: 6.5rem;
+
+}
+
+.notification-to{
+    margin-left: 9rem;
+    margin-top: 3rem;
+
+}
+
+.notification-to-input{
+    border-color: #5ca9b6 !important;
+    color: #5ca9b6 !important;
+    outline-color: #5ca9b6 !important;
+}
+
+label #notification-to-label{
+    background-color: #5ca9b6 !important;
+    color: #5ca9b6 !important;
+}
+.notification-message-area-group{
+    margin-bottom: 1.6rem;
+    margin-left: 7rem;
+    margin-top: 1.6rem;
+    max-width: 50rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
